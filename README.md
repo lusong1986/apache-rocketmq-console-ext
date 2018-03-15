@@ -1,2 +1,8 @@
-# apache-rocketmq-console-ext
-old version apache-rocketmq-console-ext
+RocketMQ Console
+================
+
+为Apache RocketMQ提供web控制台
+
+
+Note
+================

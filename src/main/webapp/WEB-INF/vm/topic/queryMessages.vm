@@ -1,0 +1,80 @@
+	
+	  <p>&nbsp;&nbsp;&nbsp;&nbsp;日期：$day</p>
+	  <p>&nbsp;&nbsp;&nbsp;&nbsp;总数：$count</p>	  
+      <div class="container theme-showcase">
+    		<table class="table table-bordered table-hover">  
+                  <thead>  
+                    <tr>  
+                       <th>id</th>
+                       <th>messageId</th>
+                       <th>bornHost</th>
+                       <th>storeHost</th>                       
+                       <th>queueId</th>
+                       <th>queueOffset</th>
+                       <th>topic</th>
+                       <th>storeTime</th>
+                       <th>bornTime</th>                                              
+                       <th>body</th>
+					   <th>properties</th>                                                    
+                    </tr>  
+                  </thead>  
+                  <tbody>
+    			  #foreach($tr in $!table.tbodyData)
+    				<tr>
+    				   <td>$!{velocityCount}</td>
+					   <td>$tr[0]</td>
+					   <td>$tr[1]</td>
+					   <td>$tr[2]</td>
+					   <td>$tr[3]</td>
+					   <td>$tr[4]</td>
+					   <td>$tr[5]</td>
+					   <td>$tr[6]</td>
+					   <td>$tr[7]</td>
+					   <td>$tr[8]</td>
+					   <td>$tr[9]</td>    						   
+        			</tr>
+    			  #end
+                  </tbody>
+            </table>
+            
+            <button class="btn btn-sm btn-info" type="button" onclick="preDay('$topicName', '$dayBefore')">前一天</button>
+            &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  
+            <button class="btn btn-sm btn-info" type="button"  onclick="nextDay('$topicName', '$dayBefore')">后一天</button>
+            <br></br>
+            <button class="btn btn-sm btn-info" type="button" onclick="prePage('$topicName', '$dayBefore','$pageNum')">上一页</button>
+            &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  
+            <button class="btn btn-sm btn-info" type="button"  onclick="nextPage('$topicName', '$dayBefore','$pageNum')">下一页</button>            
+      </div>
+      
+      <script language="javascript">
+      	function trimSpecialChar(value) {
+      		return value.replace(/%/g, "%25");
+      	}
+      
+    	function prePage(topicName, dayBefore, pageNum) {
+    	    var prePage = parseInt(pageNum)-1;
+    	    if(prePage==0){
+    	        prePage=1;
+    	    }
+    		window.location.href = "queryMessages.do?topic=" + trimSpecialChar(topicName) +"&pageNum=" + prePage +"&dayBefore="+dayBefore;
+    	}    	    	
+    	
+    	function nextPage(topicName, dayBefore, pageNum) {
+    	    var nextPage = parseInt(pageNum)+1;
+    		window.location.href = "queryMessages.do?topic=" + trimSpecialChar(topicName) +"&pageNum=" + nextPage +"&dayBefore="+dayBefore;
+    	}    	 
+    	
+    	function nextDay(topicName, dayBefore) {
+    	    var preDay = parseInt(dayBefore)-1;
+    	    if(preDay==-1){
+    	        preDay=0;
+    	    }
+    		window.location.href = "queryMessages.do?topic=" + trimSpecialChar(topicName) + "&pageNum=1&dayBefore="+preDay;
+    	}    	    	
+    	
+    	function preDay(topicName, dayBefore) {
+    	    var nextDay = parseInt(dayBefore)+1;
+    		window.location.href = "queryMessages.do?topic=" + trimSpecialChar(topicName) + "&pageNum=1&dayBefore="+nextDay;
+    	}       	   	
+    	
+    </script>

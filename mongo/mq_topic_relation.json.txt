@@ -1,0 +1,15 @@
+{"producer":"producer-a","topic":"topicA"}
+{"producer":"producer-b","topic":"topicB"}
+{"producer":"内部topics","topic":"BenchmarkTest"}
+{"producer":"内部topics","topic":"DefaultCluster"}
+{"producer":"内部topics","topic":"FAILED_SEND_MESSAGE"}
+{"producer":"内部topics","topic":"OFFSET_MOVED_EVENT"}
+{"producer":"内部topics","topic":"SELF_TEST_TOPIC"}
+{"producer":"内部topics","topic":"TBW102"}
+{"producer":"内部topics","topic":"brk-01"}
+{"producer":"内部topics","topic":"brk-02"}
+{"producer":"内部topics","topic":"brk-03"}
+{"producer":"内部topics","topic":"brk-04"}
+{"producer":"内部topics","topic":"brk-05"}
+{"producer":"内部topics","topic":"brk-06"}
+

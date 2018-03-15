@@ -1,0 +1,65 @@
+
+	  <p>&nbsp;</p>
+      <div class="container theme-showcase">
+    		<table class="table table-bordered table-hover">  
+                  <thead>  
+                    <tr>  
+                       <th>messageId</th>
+                       <th>broker</th>
+                       <th>queueId</th>
+                       <th>queueOffset</th>
+                       <th>RETRY_TOPIC</th>
+                       <th>Store Timestamp</th>
+                       <th>body</th>                       
+    				   <th>操作</th>
+                    </tr>  
+                  </thead>  
+                  <tbody>
+    			  #foreach($tr in $!table.tbodyData)
+    					<tr>
+    						  <td>$tr[0]</td>
+    						  <td>$tr[1]</td>
+    						   <td>$tr[2]</td>
+    						   <td>$tr[3]</td>
+    						   <td>$tr[4]</td>
+    						   <td>$tr[5]</td>
+    						   <td>$tr[6]</td>
+    						  <td> 
+    							<button class="btn btn-sm btn-info" type="button" onclick="resendmsg('$tr[0]')">重发</button>
+    							&nbsp;&nbsp;  
+    						  </td>
+        				</tr>
+    			  #end
+                  </tbody>
+            </table>
+            
+            <button class="btn btn-sm btn-info" type="button" onclick="prePage('$topicName', '$pageNum')">上一页</button>
+            &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  
+            <button class="btn btn-sm btn-info" type="button"  onclick="nextPage('$topicName', '$pageNum')">下一页</button>
+      </div>
+      
+      <script language="javascript">
+      	function trimSpecialChar(value) {
+      		return value.replace(/%/g, "%25");
+      	}
+      
+      	function resendmsg(msgId) {
+	      	if(window.confirm('你确定要重发这条消息吗？')){
+	    		window.location.href = "resendmsg.do?msgId=" + trimSpecialChar(msgId);
+	    	}
+    	}
+    	
+    	function prePage(topicName, pageNum) {
+    	    var prePage = parseInt(pageNum)-1;
+    	    if(prePage==0){
+    	        prePage=1;
+    	    }
+    		window.location.href = "dealDLQ.do?topic=" + trimSpecialChar(topicName) + "&pageNum="+prePage;
+    	}    	    	
+    	
+    	function nextPage(topicName, pageNum) {
+    	    var nextPage = parseInt(pageNum)+1;
+    		window.location.href = "dealDLQ.do?topic=" + trimSpecialChar(topicName) + "&pageNum="+nextPage;
+    	}    	    	
+    	
+    </script>

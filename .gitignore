@@ -1,0 +1,22 @@
+# Package Files #
+*.jar
+*.war
+*.ear
+bin
+*.iml
+.idea
+.DS_Store
+target
+*.class
+*.pmd
+target/
+*.iml
+.idea/
+logs/
+dist/
+.classpath
+.project
+.settings/
+.amateras
+/target*
+

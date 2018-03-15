@@ -1,0 +1,35 @@
+
+	  <p>&nbsp;</p>
+	  <p>&nbsp;<b>说明：该页面展示有生产者或者有消费者消费的机器列表（如果有消费者但是没有消费任何topic的消息就不会展示在这里）</b></p>
+	  <p>&nbsp;</p>
+      <div class="container theme-showcase"><!-- /container  -->
+    		<table class="table table-bordered table-hover">  
+                  <thead>  
+                    <tr>  
+	                  <th>id</th>
+					  <th>client id</th>
+					  <th>client address</th>                 
+                      <th>owner</th>		
+                      <th>producer group</th>                      			   
+                      <th>consumer group</th>
+    				  <th>Subscribe Topics</th>
+    				  <th>Bind Queues</th>    				  
+                    </tr>  
+                  </thead>  
+                  <tbody>
+    			  #foreach($tr in $!table.tbodyData)
+    					<tr>
+                              <td>$!{velocityCount}</td>    					
+    						  <td>$tr[0]</td>
+    						   <td>$tr[1]</td>
+    						  <td>$tr[2]</td>
+    						   <td>$tr[3]</td>
+    						  <td>$tr[4]</td>
+    						   <td>$tr[5]</td>
+    						  <td>$tr[6]</td>
+        				</tr>
+    			  #end
+                  </tbody>
+            </table>
+      </div><!-- container-->
+

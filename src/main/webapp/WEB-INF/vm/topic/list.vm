@@ -1,0 +1,72 @@
+
+      <div class="container">
+      <button class="btn btn-sm btn-success" type="button" onclick="add()">添加topic</button>
+      </div>
+	  <p>&nbsp;</p>
+      <div class="container theme-showcase">
+    		<table class="table table-bordered table-hover">  
+                  <thead>  
+                    <tr>  
+                      <th>topic</th>
+                      <th>producer</th>
+                      <th>owner</th>
+    				  <th>操作</th>
+                    </tr>  
+                  </thead>  
+                  <tbody>
+    			  #foreach($tr in $!table.tbodyData)
+    					<tr>
+    						  <td>$tr[0]</td>
+    						   <td>$tr[1]</td>
+    						   <td>$tr[2]</td>
+    						  <td> 
+    							<button class="btn btn-sm btn-info" type="button" onclick="stat('$tr[0]')">统计</button>
+    							&nbsp;&nbsp;  
+    							<button class="btn btn-sm btn-info" type="button" onclick="route('$tr[0]')">路由</button>
+    							&nbsp;&nbsp;  
+    							<button class="btn btn-sm btn-info" type="button" onclick="upd('$tr[0]')">更新</button>
+    							&nbsp;&nbsp; 
+    							
+								 #if($stringUtils.contains($tr[0], "%DLQ%"))
+	    							<button class="btn btn-sm btn-info" type="button" onclick="dealDLQ('$tr[0]')">查看消息体</button>
+	    							&nbsp;&nbsp;      			
+								#else
+	    							<button class="btn btn-sm btn-info" type="button" onclick="queryMessages('$tr[0]')">最近消息</button>
+	    							&nbsp;&nbsp;								
+								#end   							
+    							
+    						  </td>
+        				</tr>
+    			  #end
+                  </tbody>
+            </table>
+      </div><!-- container-->
+      <script language="javascript">
+      	function trimSpecialChar(value) {
+      		return value.replace(/%/g, "%25");
+      	}
+      
+    	function add() {
+    		window.location.href = "add.do";
+    	}
+    	
+      	function stat(topicName) {
+    		window.location.href = "stats.do?topic=" + trimSpecialChar(topicName);
+    	}
+    	
+    	function route(topicName) {
+    		window.location.href = "route.do?topic=" + trimSpecialChar(topicName);
+    	}
+    	
+    	function upd(topicName) {
+    		window.location.href = "update.do?topic=" + trimSpecialChar(topicName);
+    	}
+    	
+    	function dealDLQ(topicName) {
+    		window.location.href = "dealDLQ.do?topic=" + trimSpecialChar(topicName)+"&pageNum=1";
+    	}    
+    	
+    	function queryMessages(topicName) {
+    		window.location.href = "queryMessages.do?topic=" + trimSpecialChar(topicName)+"&pageNum=1";
+    	}     		
+    </script>

@@ -1,0 +1,49 @@
+
+	  <p>&nbsp;</p>
+      <div class="container theme-showcase"><!-- /container  -->
+    		<table class="table table-bordered table-hover">  
+                  <thead>  
+                    <tr>  
+                      <th>consumer group</th>
+                      <th>owner</th>
+    				  <th>消费者</th>
+                    </tr>  
+                  </thead>  
+                  <tbody>
+    			  #foreach($tr in $!table.tbodyData)
+    					<tr>
+    						  <td>$tr[0]</td>
+    						   <td>$tr[1]</td>
+    						  <td> 
+    							<button class="btn btn-sm btn-info" type="button" onclick="stat('$tr[0]')">消费者连接</button>
+    							&nbsp;&nbsp;  
+    							<button class="btn btn-sm btn-info" type="button" onclick="progress('$tr[0]')">消费进度</button>
+    							&nbsp;&nbsp;     	    							
+    						  </td>
+        				</tr>
+    			  #end
+                  </tbody>
+            </table>
+      </div><!-- container-->
+      <script language="javascript">
+      
+		function getContextPath() {
+		    var pathName = document.location.pathname;
+		    var index = pathName.substr(1).indexOf("/");
+		    var result = pathName.substr(0,index+1);
+		    return result;
+		}
+      
+      	function trimSpecialChar(value) {
+      		return value.replace(/%/g, "%25");
+      	}
+      
+      	function progress(groupName) {
+    		window.location.href = getContextPath() + "/consumer/consumerProgress.do?groupName=" + trimSpecialChar(groupName);
+    	}
+    	
+        function stat(groupName) {
+    		window.location.href = "consumerConnection.do?consumerGroup=" + trimSpecialChar(groupName);
+    	}    	
+    	
+    </script>

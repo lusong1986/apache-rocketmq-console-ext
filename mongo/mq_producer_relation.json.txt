@@ -1,0 +1,4 @@
+{"producer":"producer-a","owner":"张三"}
+{"producer":"producer-b","owner":"张三"}
+{"producer":"内部topics","owner":"卢松"}
+

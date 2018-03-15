@@ -1,0 +1,75 @@
+
+	  <p>&nbsp;&nbsp;&nbsp;昨天的未处理事务消息</p>
+      <div class="container theme-showcase">
+    		<table class="table table-bordered table-hover">  
+                  <thead>  
+                    <tr>  
+                       <th>messageId</th>
+                       <th>broker</th>
+                       <th>queueId</th>
+                       <th>_catRootMessageId</th>
+                       <th>topic</th>
+                       <th>Store Time</th>
+                       <th>body</th>                       
+    				   <th>操作</th>
+  				       <th>操作</th>    				   
+                    </tr>  
+                  </thead>  
+                  <tbody>
+    			  #foreach($tr in $!table.tbodyData)
+    					<tr>
+    						  <td>$tr[0]</td>
+    						  <td>$tr[1]</td>
+    						   <td>$tr[2]</td>
+    						   <td>$tr[3]</td>
+    						   <td>$tr[4]</td>
+    						   <td>$tr[5]</td>
+    						   <td>$tr[6]</td>
+    						  <td> 
+    							<button class="btn btn-sm btn-info" type="button" onclick="commit('$tr[0]')">提交</button>	&nbsp;&nbsp;  
+    						  </td>
+    						  <td>
+    							<button class="btn btn-sm btn-info" type="button" onclick="rollback('$tr[0]')">回滚</button>
+    							&nbsp;&nbsp;      			
+    						  </td>
+        				</tr>
+    			  #end
+                  </tbody>
+            </table>
+            
+            <button class="btn btn-sm btn-info" type="button" onclick="prePage('$pageNum')">上一页</button>
+            &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  
+            <button class="btn btn-sm btn-info" type="button"  onclick="nextPage('$pageNum')">下一页</button>
+      </div>
+      
+      <script language="javascript">
+      	function trimSpecialChar(value) {
+      		return value.replace(/%/g, "%25");
+      	}
+      
+      	function commit(msgId) {
+      		if(window.confirm('你确定要提交这条事务消息吗？')){
+	    		window.location.href = "commitTran.do?msgId=" + trimSpecialChar(msgId);
+	    	}
+    	}
+    	
+      	function rollback(msgId) {
+      		if(window.confirm('你确定要回滚这条事务消息吗？')){      	
+	    		window.location.href = "rollbackTran.do?msgId=" + trimSpecialChar(msgId);
+	    	}
+    	}    	
+    	
+    	function prePage(pageNum) {
+    	    var prePage = parseInt(pageNum)-1;
+    	    if(prePage==0){
+    	        prePage=1;
+    	    }
+    		window.location.href = "unHandlePrepareMsgYesterday.do?pageNum="+prePage;
+    	}    	    	
+    	
+    	function nextPage( pageNum) {
+    	    var nextPage = parseInt(pageNum)+1;
+    		window.location.href = "unHandlePrepareMsgYesterday.do?pageNum="+nextPage;
+    	}    	    	
+    	
+    </script>

@@ -1,0 +1,39 @@
+
+	  <p>&nbsp;</p>
+      <div class="container theme-showcase"><!-- /container  -->
+    		<table class="table table-bordered table-hover">  
+                  <thead>  
+                    <tr>  
+                      <th>producer group</th>
+                      <th>owner</th>
+                      <th>send topics</th>
+    				  <th>生产者</th>
+                    </tr>  
+                  </thead>  
+                  <tbody>
+    			  #foreach($tr in $!table.tbodyData)
+    					<tr>
+    						  <td>$tr[0]</td>
+    						  <td>$tr[1]</td>
+    						  <td>$tr[2]</td>
+    						  <td> 
+    							<button class="btn btn-sm btn-info" type="button" onclick="stat('$tr[0]')">生产者连接</button>
+    							&nbsp;&nbsp;  
+    						  </td>
+        				</tr>
+    			  #end
+                  </tbody>
+            </table>
+      </div><!-- container-->
+      
+      
+      <script language="javascript">
+      	function trimSpecialChar(value) {
+      		return value.replace(/%/g, "%25");
+      	}
+      
+      	function stat(groupName) {
+    		window.location.href = "producerConnection.do?producerGroup=" + trimSpecialChar(groupName);
+    	}
+    	
+    </script>

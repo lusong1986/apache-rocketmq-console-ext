@@ -1,0 +1,41 @@
+ <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <div class="container">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="/">Apache RocketMQ控制台 v1.0.0</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                      <ul class="nav navbar-nav">
+                            <li #if($cluster_flag)class="$cluster_flag"#end><a href="$root/cluster/list.do">集群</a></li>
+                            <li #if($topic_flag)class="$topic_flag"#end><a href="$root/topic/list.do">topic</a></li>
+                            <li class="dropdown $!connection_flag" >
+                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">连接<b class="caret"></b></a>
+                                 <ul class="dropdown-menu">
+                                    <li><a href="$root/connection/hostProducerConsumerList.do">在线机器生产消费统计</a></li>                                 
+                                    <li><a href="$root/connection/consumerGroupList.do">在线消费组列表</a></li>
+                                    <li><a href="$root/connection/producerGroupList.do">在线生产组列表</a></li>                                    
+                                    <li><a href="$root/connection/queryConsumerByIp.do">根据消息者ip查询消费queue</a></li>                                    
+                                 </ul>
+                            </li>
+    						
+                			<li class="dropdown $!message_flag" >
+        							<a href="#" class="dropdown-toggle" data-toggle="dropdown">消息查询<b class="caret"></b></a>
+        							<ul class="dropdown-menu">
+        							   	<li><a href="$root/message/msgPutStatistic.do">消息生产统计</a></li>
+        							   	<li><a href="$root/message/msgGetStatistic.do">消息消费统计</a></li>
+        							   	<li><a href="$root/message/dlqStatistic.do">DLQ历史统计</a></li>        							   	
+        							   	<li><a href="$root/message/topicStatistic.do">topic发送top10</a></li>
+						   				<li><a href="$root/message/unHandlePrepareMsg.do?pageNum=1">今天未处理的事务消息</a></li>    
+						   				<li><a href="$root/message/unHandlePrepareMsgYesterday.do?pageNum=1">昨天未处理的事务消息</a></li>        	
+						   				<li><a href="$root/message/sendFailedMsgs.do?pageNum=1&dayBefore=0">发送失败的消息</a></li>     
+						   				<li><a href="$root/message/produce.do">发送消息（慎重）</a></li>  					   				    							   	
+        								<li><a href="$root/message/queryMsgById.do">根据id查询</a></li>
+                                        <li><a href="$root/message/queryMsgByKey.do">根据key查询</a></li>
+        								<li><a href="$root/message/queryMsgByOffset.do">根据offset查询</a></li>
+        							 </ul>
+        					</li>
+        					
+                      </ul>
+                </div><!--/.nav-collapse -->
+          </div>
+    </div>

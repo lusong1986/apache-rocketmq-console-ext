@@ -1,0 +1,97 @@
+#form($options $action)
+  #if($cc)
+  <div class="container theme-showcase">
+		<table class="table table-bordered table-hover">  
+              <thead>  
+                <tr>  
+                  <th>id</th>
+				  <th>client id(进程号)</th>
+				  <th>client address(端口号)</th>
+				  <th>language</th>
+				  <th>version</th>
+				  <th>消费的queue</th>				  
+  				  <th>是否已经下线</th>	
+				  <th>下线消费端(重启后重新消费)</th>	  			
+				  <th>下线服务器(重启后也不再消费)</th>	 
+				  <th>上线服务器(立即开始消费)</th> 		  			  
+                </tr>  
+              </thead>  
+              <tbody> 
+				#foreach($conn in $cc.connectionSet)
+					<tr>
+                        <td>$!{velocityCount}</td>
+						<td>$conn.clientId</td>
+						<td>$conn.ClientAddr</td>
+						<td>$conn.language</td>
+						<td>$conn.version</td>
+						<td>$!conn.bindQueues</td>
+						<td>$conn.offline</td>
+						  <td> 
+							<button class="btn btn-sm btn-info" type="button" onclick="offline('$consumerGroup', '$conn.clientId')">下线进程</button>
+							&nbsp;&nbsp;  
+						  </td>	
+						  
+						  <td> 
+							<button class="btn btn-sm btn-info" type="button" onclick="offlineHost('$consumerGroup', '$conn.clientId')">下线服务器</button>
+							&nbsp;&nbsp;  
+						  </td>	
+						  
+						  <td> 
+							<button class="btn btn-sm btn-info" type="button" onclick="onlineHost('$consumerGroup', '$conn.clientId')">上线服务器</button>
+							&nbsp;&nbsp;  
+						  </td>							  						  					
+					</tr>
+				#end
+              </tbody>
+        </table>
+        <p>Below is subscription:</p>
+		<table class="table table-bordered table-hover">  
+              <thead>  
+                <tr>  
+                  <th>id</th>
+				  <th>topic</th>
+				  <th>subscription expression</th>
+                </tr>  
+              </thead>  
+              <tbody> 
+				#foreach($entry in $cc.subscriptionTable.entrySet())
+					<tr>
+                        <td>$!{velocityCount}</td>
+						<td>$entry.value.topic</td>
+						<td>$entry.value.subString</td>
+					</tr>
+				#end
+              </tbody>
+        </table>
+        <p><b>consume type :</b> $cc.consumeType</p>
+		<p><b>message model :</b> $cc.messageModel</p>
+		<p><b>consume from where :</b> $cc.consumeFromWhere</p>
+   </div>
+   #end
+   
+      <script language="javascript">
+      	function trimSpecialChar(value) {
+      		return value.replace(/%/g, "%25");
+      	}
+      
+    	function offline(consumerGroup, clientId) {
+	      	if(window.confirm('你确定要下线这个消费者进程吗？')){
+    			window.location.href = "offlineConsumerByClientIds.do?consumerGroup=" + trimSpecialChar(consumerGroup) + "&clientIds="+clientId;
+    		 }
+    	}    	  
+    	
+    	function offlineHost(consumerGroup, clientId) {
+	      	if(window.confirm('你确定要下线这个消费者服务器吗？')){
+	      	    var clientHost = clientId.substr(0,clientId.indexOf('@'));
+    			window.location.href = "offlineConsumerByClientIds.do?consumerGroup=" + trimSpecialChar(consumerGroup) + "&clientIds="+clientHost;
+    		 }
+    	}  
+    	
+    	function onlineHost(consumerGroup, clientId) {
+	      	if(window.confirm('你确定要上线这个消费者服务器吗？')){
+	      		var clientHost = clientId.substr(0,clientId.indexOf('@'));
+    			window.location.href = "onlineConsumerByClientIds.do?consumerGroup=" + trimSpecialChar(consumerGroup) + "&clientIds="+clientHost;
+    		 }
+    	}      	    	  	
+    	
+    </script>
