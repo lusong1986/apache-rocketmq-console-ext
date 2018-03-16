@@ -44,6 +44,7 @@ import com.alibaba.rocketmq.common.ConsConnection;
 import com.alibaba.rocketmq.common.ConsumerConnectionExt;
 import com.alibaba.rocketmq.common.HostInfo;
 import com.alibaba.rocketmq.common.Table;
+import com.alibaba.rocketmq.service.mock.DefaultMQAdminExtMock;
 import com.alibaba.rocketmq.validate.CmdTrace;
 
 @Service
@@ -78,7 +79,7 @@ public class ConnectionService extends AbstractService {
 
 	public Table hostProducerConsumerList() throws Throwable {
 		Throwable t = null;
-		final DefaultMQAdminExt defaultMQAdminExt = getDefaultMQAdminExt();
+		final DefaultMQAdminExtMock defaultMQAdminExt = getDefaultMQAdminExtMock();
 		try {
 			defaultMQAdminExt.start();
 
@@ -205,7 +206,7 @@ public class ConnectionService extends AbstractService {
 
 	public Table getOnlineProducerGroupList() throws Throwable {
 		Throwable t = null;
-		DefaultMQAdminExt defaultMQAdminExt = getDefaultMQAdminExt();
+		DefaultMQAdminExtMock defaultMQAdminExt = getDefaultMQAdminExtMock();
 		try {
 			defaultMQAdminExt.start();
 
@@ -339,7 +340,7 @@ public class ConnectionService extends AbstractService {
 
 	public Map<String, String> onlineConsumerByClientIdsGroup(final String consumerGroup, final String clientIds)
 			throws Throwable {
-		DefaultMQAdminExt defaultMQAdminExt = getDefaultMQAdminExt();
+		DefaultMQAdminExtMock defaultMQAdminExt = getDefaultMQAdminExtMock();
 		final Map<String, String> onlineMap = new HashMap<String, String>();
 		try {
 			defaultMQAdminExt.start();
@@ -361,7 +362,7 @@ public class ConnectionService extends AbstractService {
 
 	public Map<String, String> offlineConsumerByClientIdsGroup(final String consumerGroup, final String clientIds)
 			throws Throwable {
-		DefaultMQAdminExt defaultMQAdminExt = getDefaultMQAdminExt();
+		DefaultMQAdminExtMock defaultMQAdminExt = getDefaultMQAdminExtMock();
 		DefaultMQProducer defaultProducer = null;
 		final Map<String, String> offlineMap = new HashMap<String, String>();
 		try {
@@ -406,7 +407,7 @@ public class ConnectionService extends AbstractService {
 	 */
 	public ConsumerConnectionExt queryConsumerByIp(String hostIp) throws Throwable {
 		Throwable t = null;
-		DefaultMQAdminExt defaultMQAdminExt = getDefaultMQAdminExt();
+		DefaultMQAdminExtMock defaultMQAdminExt = getDefaultMQAdminExtMock();
 		DefaultMQProducer defaultProducer = null;
 		try {
 			defaultMQAdminExt.start();
@@ -510,7 +511,7 @@ public class ConnectionService extends AbstractService {
 		throw t;
 	}
 
-	private ConsumerConnectionExt getConsumerConnectionWithBindQueues(DefaultMQAdminExt defaultMQAdminExt,
+	private ConsumerConnectionExt getConsumerConnectionWithBindQueues(DefaultMQAdminExtMock defaultMQAdminExt,
 			String consumerGroup) {
 		try {
 			final Map<String, ConsumerConnection> ccMap = defaultMQAdminExt
@@ -580,7 +581,7 @@ public class ConnectionService extends AbstractService {
 	@CmdTrace(cmdClazz = ConsumerConnectionSubCommand.class)
 	public ConsumerConnectionExt getConsumerConnection(String consumerGroup) throws Throwable {
 		Throwable t = null;
-		DefaultMQAdminExt defaultMQAdminExt = getDefaultMQAdminExt();
+		DefaultMQAdminExtMock defaultMQAdminExt = getDefaultMQAdminExtMock();
 		DefaultMQProducer defaultProducer = null;
 		try {
 			defaultMQAdminExt.start();
