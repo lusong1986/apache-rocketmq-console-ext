@@ -19,7 +19,7 @@
 
 **9.支持带properties的消息发送**
 
-**分支 feature/use-lusong-apache-rocketmq需要搭配 [apache-rocketmq-console-ext]（https://github.com/lusong1986/apacherocketmq ） 使用。
-需要部署新的broker，console使用新的客户端，新功能才能体现出来。**
+**分支 feature/use-lusong-apache-rocketmq需要搭配这个 [apacherocketmq]（https://github.com/lusong1986/apacherocketmq ） 使用。
+部署新的broker，console使用新的客户端，新功能才能体现出来。**
 
 **如果使用master分支，部分功能不能使用。**
