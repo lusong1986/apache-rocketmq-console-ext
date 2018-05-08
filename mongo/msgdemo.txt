@@ -1,4 +1,4 @@
-{
+old:{
     "_id" : ObjectId("5a7aaf67e4b072c34814c3b2"),
     "_catRootMessageId" : "mqbroker-ac104494-421636-7",
     "_catChildMessageId1" : "mqbroker-ac104494-421663-14",
@@ -24,4 +24,37 @@
     "bodyCRC" : 2048912281,
     "reconsumeTimes" : 0,
     "preparedTransactionOffset" : NumberLong(0)
+}
+
+============
+new:
+{
+    "_id" : ObjectId("5add91867d5087246112b18a"),
+    "updateTime" : ISODate("2018-04-23T15:55:50.723+08:00"),
+    "tranStatus" : 0,
+    "storeHost" : "172.16.68.124:10911",
+    "topic" : "TopicTest",
+    "queueId" : 3,
+    "sysFlag" : 0,
+    "queueOffset" : NumberLong(1),
+    "tags" : "TagA",
+    "bornHost" : "172.16.106.57:53148",
+    "bornTime" : ISODate("2018-04-23T15:55:48.423+08:00"),
+    "msgId" : "AC10447C00002A9F00000000000005F8",
+    "bodyCRC" : 198614610,
+    "storeSize" : 189,
+    "reconsumeTimes" : 0,
+    "preparedTransactionOffset" : NumberLong(0),
+    "createTime" : ISODate("2018-04-23T15:55:50.723+08:00"),
+    "flag" : 0,
+    "storeTime" : ISODate("2018-04-23T15:54:14.191+08:00"),
+    "propertiesString" : {
+        "KEYS" : "OrderID188",
+        "UNIQ_KEY" : "AC106A39404C4CCBC2D374B6F9470004",
+        "WAIT" : "true",
+        "TAGS" : "TagA"
+    },
+    "commitLogOffset" : NumberLong(1528),
+    "content" : "Hello world",
+    "keys" : "OrderID188"
 }

@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.rocketmq.admin.ConsoleMQAdminExt;
 import com.alibaba.rocketmq.config.ConfigureInitializer;
-import com.alibaba.rocketmq.service.mock.DefaultMQAdminExtMock;
 
 public abstract class AbstractService {
 
@@ -33,13 +32,6 @@ public abstract class AbstractService {
 		defaultMQAdminExt.setInstanceName(Long.toString(System.currentTimeMillis()) + 100000000); // different instance
 																									// name
 		return defaultMQAdminExt;
-	}
-	
-	protected DefaultMQAdminExtMock getDefaultMQAdminExtMock() {
-		DefaultMQAdminExtMock defaultMQAdminExtMock = new DefaultMQAdminExtMock();
-		defaultMQAdminExtMock.setInstanceName(Long.toString(System.currentTimeMillis()) + 100000000); // different instance
-																									// name
-		return defaultMQAdminExtMock;
 	}
 
 	protected void shutdownDefaultMQAdminExt(DefaultMQAdminExt defaultMQAdminExt) {
