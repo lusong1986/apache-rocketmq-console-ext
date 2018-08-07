@@ -132,8 +132,8 @@ public class ConnectionService extends AbstractService {
 						continue;
 					}
 
-					final ProducerConnection producerConnection = defaultMQAdminExt.examineProducerConnectionInfo(
-							producerGroupName, MixAll.DEFAULT_TOPIC);
+					final ProducerConnection producerConnection = defaultMQAdminExt
+							.examineProducerConnectionInfo(producerGroupName, MixAll.BENCHMARK_TOPIC);
 					for (Connection pConnection : producerConnection.getConnectionSet()) {
 						HostInfo hostInfo = new HostInfo();
 
@@ -178,7 +178,8 @@ public class ConnectionService extends AbstractService {
 				String owner = "NO";
 				if (mongoProducerRelationService.getConsumerOwnerRelations().get(hostInfo.getConsumerGroup()) != null) {
 					owner = mongoProducerRelationService.getConsumerOwnerRelations().get(hostInfo.getConsumerGroup());
-				} else if (mongoProducerRelationService.getProducerOwnerRelations().get(hostInfo.getProducerGroup()) != null) {
+				} else if (mongoProducerRelationService.getProducerOwnerRelations()
+						.get(hostInfo.getProducerGroup()) != null) {
 					owner = mongoProducerRelationService.getProducerOwnerRelations().get(hostInfo.getProducerGroup());
 				}
 				tr[2] = owner;
@@ -216,10 +217,11 @@ public class ConnectionService extends AbstractService {
 				for (String producerGroupName : onlineProducerGroupNameList) {
 					Object[] tr = table.createTR();
 					tr[0] = producerGroupName;
-					tr[1] = mongoProducerRelationService.getProducerOwnerRelations().get(producerGroupName) != null ? mongoProducerRelationService
-							.getProducerOwnerRelations().get(producerGroupName) : "NO";
-					tr[2] = mongoProducerRelationService.getProducerTopicRelations().get(producerGroupName) != null ? mongoProducerRelationService
-							.getProducerTopicRelations().get(producerGroupName).toString()
+					tr[1] = mongoProducerRelationService.getProducerOwnerRelations().get(producerGroupName) != null
+							? mongoProducerRelationService.getProducerOwnerRelations().get(producerGroupName)
+							: "NO";
+					tr[2] = mongoProducerRelationService.getProducerTopicRelations().get(producerGroupName) != null
+							? mongoProducerRelationService.getProducerTopicRelations().get(producerGroupName).toString()
 							: "NO";
 					table.insertTR(tr);
 				}
@@ -250,8 +252,9 @@ public class ConnectionService extends AbstractService {
 				for (String consumerGroupName : onlineConsumerGroupNameList) {
 					Object[] tr = table.createTR();
 					tr[0] = consumerGroupName;
-					tr[1] = mongoProducerRelationService.getConsumerOwnerRelations().get(consumerGroupName) != null ? mongoProducerRelationService
-							.getConsumerOwnerRelations().get(consumerGroupName) : "NO";
+					tr[1] = mongoProducerRelationService.getConsumerOwnerRelations().get(consumerGroupName) != null
+							? mongoProducerRelationService.getConsumerOwnerRelations().get(consumerGroupName)
+							: "NO";
 					table.insertTR(tr);
 				}
 				return table;
@@ -267,8 +270,8 @@ public class ConnectionService extends AbstractService {
 		throw t;
 	}
 
-	public Set<String> getOnlineConsumerGroupList(DefaultMQAdminExt defaultMQAdminExt) throws RemotingException,
-			MQClientException, InterruptedException, MQBrokerException {
+	public Set<String> getOnlineConsumerGroupList(DefaultMQAdminExt defaultMQAdminExt)
+			throws RemotingException, MQClientException, InterruptedException, MQBrokerException {
 		Set<String> groupNameList = new HashSet<String>();
 		TopicList topicList = defaultMQAdminExt.fetchAllTopicList();
 		if (topicList.getTopicList().size() > 0) {
@@ -375,8 +378,8 @@ public class ConnectionService extends AbstractService {
 			System.out.println(">>>>>>>>>>>>online consumerClientIds:" + onlineConsumerClientIds);
 
 			if (onlineConsumerClientIds.size() > 1) {
-				final Map<String, Boolean> offlineResult = defaultMQAdminExt.offlineConsumerClientIdsByGroup(
-						consumerGroup, clientIds);
+				final Map<String, Boolean> offlineResult = defaultMQAdminExt
+						.offlineConsumerClientIdsByGroup(consumerGroup, clientIds);
 
 				for (Entry<String, Boolean> entry : offlineResult.entrySet()) {
 					offlineMap.put(entry.getKey(), entry.getValue() ? "Success" : "failed");
@@ -417,7 +420,7 @@ public class ConnectionService extends AbstractService {
 			final MQClientAPIImpl mQClientAPIImpl = defaultProducer.getDefaultMQProducerImpl().getmQClientFactory()
 					.getMQClientAPIImpl();
 
-			final TopicRouteData topicRouteData = defaultMQAdminExt.examineTopicRouteInfo(MixAll.DEFAULT_TOPIC);
+			final TopicRouteData topicRouteData = defaultMQAdminExt.examineTopicRouteInfo(MixAll.BENCHMARK_TOPIC);
 
 			final Map<ConsumerConnection, String> connectionGroupMap = new HashMap<ConsumerConnection, String>();
 			final Map<ConsumerConnection, String> brokerMap = new HashMap<ConsumerConnection, String>();
@@ -449,16 +452,16 @@ public class ConnectionService extends AbstractService {
 						consConnection.setConnectedBroker(connectedBroker);
 
 						final String consumerGroup = connectionGroupMap.get(consumerConnection);
-						final List<String> consumerClientIds = mQClientAPIImpl.getConsumerIdListByGroup(
-								connectedBroker, consumerGroup, 5000);
+						final List<String> consumerClientIds = mQClientAPIImpl.getConsumerIdListByGroup(connectedBroker,
+								consumerGroup, 5000);
 						// System.out.println(">>>>>>>>>>>>>connectedBroker:" + connectedBroker
 						// + ">>>>>>>>>>>>consumerClientIds:" + consumerClientIds);
 
 						consConnection.setConsumerGroup(consumerGroup);
 						consConnection.setOffline(!consumerClientIds.contains(connection.getClientId()));
 
-						Map<String, String> queuesMap = defaultMQAdminExt.getQueuesByConsumerAddress(connection
-								.getClientAddr());
+						Map<String, String> queuesMap = defaultMQAdminExt
+								.getQueuesByConsumerAddress(connection.getClientAddr());
 
 						// System.out.println(">>>>>>>>>>>>>>>>for clientAddr:" + connection.getClientAddr()
 						// + ">>>>>>>queuesMap:" + queuesMap);
@@ -481,9 +484,9 @@ public class ConnectionService extends AbstractService {
 						} catch (Exception e) {
 						}
 
-						consConnection
-								.setBindQueues(StringUtils.isNotEmpty(bindQueuesString.toString()) ? ("<b>[broker-"
-										+ connectedBroker + "]:</b>" + bindQueuesString) : "");
+						consConnection.setBindQueues(StringUtils.isNotEmpty(bindQueuesString.toString())
+								? ("<b>[broker-" + connectedBroker + "]:</b>" + bindQueuesString)
+								: "");
 						targetConnectionSet.add(consConnection);
 					}
 				}
@@ -541,8 +544,8 @@ public class ConnectionService extends AbstractService {
 
 					final StringBuilder bindQueuesString = new StringBuilder();
 					try {
-						final String bindQueusByBroker = defaultMQAdminExt.getQueuesByBrokerAndConsumerAddress(
-								brokerAddr, connection.getClientAddr());
+						final String bindQueusByBroker = defaultMQAdminExt
+								.getQueuesByBrokerAndConsumerAddress(brokerAddr, connection.getClientAddr());
 						if (StringUtils.isNotEmpty(bindQueusByBroker)) {
 							String[] bindQueueArray = org.apache.commons.lang.StringUtils.split(bindQueusByBroker, ",");
 
@@ -589,7 +592,8 @@ public class ConnectionService extends AbstractService {
 			final MQClientAPIImpl mQClientAPIImpl = defaultProducer.getDefaultMQProducerImpl().getmQClientFactory()
 					.getMQClientAPIImpl();
 
-			final List<String> consumerClientIds = getOnlineClientIds(consumerGroup, defaultMQAdminExt, mQClientAPIImpl);
+			final List<String> consumerClientIds = getOnlineClientIds(consumerGroup, defaultMQAdminExt,
+					mQClientAPIImpl);
 			// System.out.println(">>>>>>>>>>>>online consumerClientIds:" + consumerClientIds);
 
 			final Map<String, ConsumerConnection> ccMap = defaultMQAdminExt
@@ -619,8 +623,8 @@ public class ConnectionService extends AbstractService {
 
 					final StringBuilder bindQueuesString = new StringBuilder();
 					try {
-						final String bindQueusByBroker = defaultMQAdminExt.getQueuesByBrokerAndConsumerAddress(
-								brokerAddr, connection.getClientAddr());
+						final String bindQueusByBroker = defaultMQAdminExt
+								.getQueuesByBrokerAndConsumerAddress(brokerAddr, connection.getClientAddr());
 						String[] bindQueueArray = org.apache.commons.lang.StringUtils.split(bindQueusByBroker, ",");
 
 						Set<String> queueSet = new TreeSet<String>();
@@ -660,7 +664,7 @@ public class ConnectionService extends AbstractService {
 	private List<String> getOnlineClientIds(String consumerGroup, DefaultMQAdminExt defaultMQAdminExt,
 			final MQClientAPIImpl mQClientAPIImpl) throws RemotingException, MQClientException, InterruptedException,
 			RemotingConnectException, RemotingSendRequestException, RemotingTimeoutException, MQBrokerException {
-		final TopicRouteData topicRouteData = defaultMQAdminExt.examineTopicRouteInfo(MixAll.DEFAULT_TOPIC);
+		final TopicRouteData topicRouteData = defaultMQAdminExt.examineTopicRouteInfo(MixAll.BENCHMARK_TOPIC);
 		for (BrokerData brokerData : topicRouteData.getBrokerDatas()) {
 			final String selectBrokerAddr = brokerData.selectBrokerAddr();
 

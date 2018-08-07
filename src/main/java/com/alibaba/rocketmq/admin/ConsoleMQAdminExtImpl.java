@@ -14,12 +14,12 @@ import org.apache.rocketmq.common.help.FAQUrl;
 import org.apache.rocketmq.common.protocol.body.QueueTimeSpan;
 import org.apache.rocketmq.common.protocol.route.BrokerData;
 import org.apache.rocketmq.common.protocol.route.TopicRouteData;
+import org.apache.rocketmq.logging.InternalLogger;
 import org.apache.rocketmq.remoting.RPCHook;
 import org.apache.rocketmq.remoting.exception.RemotingException;
-import org.slf4j.Logger;
 
 public class ConsoleMQAdminExtImpl implements MQAdminExtInner {
-	private final Logger log = ClientLogger.getLog();
+	private final InternalLogger log = ClientLogger.getLog();
 	private final ConsoleMQAdminExt defaultMQAdminExt;
 	private ServiceState serviceState = ServiceState.CREATE_JUST;
 	private MQClientInstance mqClientInstance;

@@ -17,7 +17,7 @@ import org.apache.rocketmq.remoting.exception.RemotingException;
 public class ConsoleMQAdminExt extends ClientConfig {
 	private final ConsoleMQAdminExtImpl defaultMQAdminExtImpl;
 	private String adminExtGroup = "admin_ext_group_console";
-	private String createTopicKey = MixAll.DEFAULT_TOPIC;
+	private String createTopicKey = MixAll.BENCHMARK_TOPIC;
 
 	public ConsoleMQAdminExt() {
 		this.defaultMQAdminExtImpl = new ConsoleMQAdminExtImpl(this, null);

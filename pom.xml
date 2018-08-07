@@ -28,7 +28,7 @@
 		<ganymed.version>262</ganymed.version>		
 
 	    <morphia.version>1.3.2</morphia.version>		
-		<rocketmq.version>4.2.0</rocketmq.version>
+		<rocketmq.version>4.3.0</rocketmq.version>
 	</properties>
 
 	<dependencies>
