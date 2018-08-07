@@ -1,4 +1,4 @@
-**Apache RocketMQ控制台，支持apache rocketmq4.2.0及以上版本，新功能点：**
+**Apache RocketMQ控制台，支持apache rocketmq4.3.0及以上版本，新功能点：**
 
 
 **1.支持灰度下线、上线消费者**
